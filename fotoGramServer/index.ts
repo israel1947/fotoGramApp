@@ -1,8 +1,13 @@
 import Server from "./class/server";
 import userRoute from "./routes/users";
 import mongoose, { ConnectOptions } from "mongoose";
+import bodyParser from "body-parser";
 
 const serve = new Server();
+
+//body parser
+serve.app.use(bodyParser.urlencoded({extended:true}));
+serve.app.use(bodyParser.json());
 
 //routes of the aplication
 serve.app.use('/user', userRoute);

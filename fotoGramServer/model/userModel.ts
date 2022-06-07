@@ -7,7 +7,7 @@ const userSchema = new Schema({
     },
     avatar:{
         type:String,
-        default:'ave-1.png'
+        default:'av-1.png'
     },
     email:{
         type:String,
@@ -20,10 +20,10 @@ const userSchema = new Schema({
     }
 });
 interface Iusers extends Document{
-    nombre:String,
-    email:String,
-    password:String,
-    avatar:String
+    nombre:string,
+    avatar:string
+    email:string,
+    password:string,
 }
 
-export const User = model<Iusers>('Users', userSchema);
+export const User = model<Iusers>('User', userSchema);
