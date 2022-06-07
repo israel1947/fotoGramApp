@@ -9,7 +9,7 @@ const userSchema = new mongoose_1.Schema({
     },
     avatar: {
         type: String,
-        default: 'av-1.png'
+        default: 'ave-1.png'
     },
     email: {
         type: String,
