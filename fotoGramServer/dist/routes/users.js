@@ -75,9 +75,34 @@ userRoute.post('/create', (req, resp) => {
 });
 //Update user
 userRoute.post('/update', auth_1.verifyToken, (req, resp) => {
-    resp.json({
-        ok: true,
-        user: req.user
+    //ejecut  if user  token is correct
+    const userUpdate = {
+        nombre: req.body.nombre,
+        email: req.body.email,
+        avatar: req.body.avatar
+    };
+    //update user
+    userModel_1.User.findByIdAndUpdate(req.user._id, userUpdate, { new: true }, (err, userDB) => {
+        if (err) {
+            throw err;
+        }
+        if (!userDB) {
+            return resp.json({
+                ok: false,
+                message: 'the user with this id does not exist'
+            });
+        }
+        //generate a new token when the user information is update
+        const userToken = token_1.default.getJwtToken({
+            _id: userDB._id,
+            nombre: userDB.nombre,
+            email: userDB.email,
+            avatar: userDB.avatar
+        });
+        resp.json({
+            ok: true,
+            token: userToken
+        });
     });
 });
 exports.default = userRoute;
