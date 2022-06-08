@@ -1,4 +1,5 @@
 import { Router,Response } from "express";
+import { FileUpload } from "../interface/file-upload";
 import { verifyToken } from '../middlewares/auth';
 import { Post } from '../model/post.model';
 
@@ -52,5 +53,38 @@ postRouter.post('/',[verifyToken],(req:any, resp:Response)=>{
     })
 
 })
+
+//Upload files
+postRouter.post('/upload',[verifyToken],(req:any, resp:Response)=>{
+    if(!req.files){
+        return resp.status(400).json({
+            ok:false,
+            message:'no files could be uploaded',
+        });
+    }
+
+    const file:FileUpload = req.files.image;
+
+    //no file loaded
+    if(!file){
+        return resp.status(400).json({
+            ok:false,
+            message:'the selected image could not be uploaded',
+        });
+    }
+    //must always be an image
+    if(!file.mimetype.includes('image')){
+        return resp.status(400).json({
+            ok:false,
+            message:'the file select is not a image',
+        });
+    }
+
+    resp.json({
+        ok:true,
+        file:file.mimetype
+    });
+});
+
 
 export default postRouter;

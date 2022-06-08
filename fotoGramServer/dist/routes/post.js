@@ -52,4 +52,32 @@ postRouter.post('/', [auth_1.verifyToken], (req, resp) => {
         resp.json(err);
     });
 });
+//Upload files
+postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => {
+    if (!req.files) {
+        return resp.status(400).json({
+            ok: false,
+            message: 'no files could be uploaded',
+        });
+    }
+    const file = req.files.image;
+    //no file loaded
+    if (!file) {
+        return resp.status(400).json({
+            ok: false,
+            message: 'the selected image could not be uploaded',
+        });
+    }
+    //must always be an image
+    if (!file.mimetype.includes('image')) {
+        return resp.status(400).json({
+            ok: false,
+            message: 'the file select is not a image',
+        });
+    }
+    resp.json({
+        ok: true,
+        file: file.mimetype
+    });
+});
 exports.default = postRouter;
