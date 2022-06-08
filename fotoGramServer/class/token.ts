@@ -13,8 +13,8 @@ export default class Token{
         },this.seed,{expiresIn:this.expiration} );
     }
 
-    static checkToken(userToken:string){
-        new Promise((resolve,rejects)=>{
+    static checkToken(userToken:string):Promise<any>{
+         return new Promise((resolve,rejects)=>{
 
             jwt.verify(userToken,this.seed,function(err, decoded){
                 if(err){
@@ -25,6 +25,9 @@ export default class Token{
                   resolve(decoded);
               }
             })
+        }).catch(err=>{
+            console.log(err);
+            
         })
     }
 } 

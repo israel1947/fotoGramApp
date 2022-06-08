@@ -2,6 +2,7 @@ import { Router,Request,Response } from "express";
 import { User } from "../model/userModel";
 import bcrypt from 'bcrypt';
 import Token from "../class/token";
+import { verifyToken } from "../middlewares/auth";
 
 const userRoute = Router();
 
@@ -78,5 +79,14 @@ userRoute.post('/create',(req:Request, resp:Response)=>{
         })
     })
 });
+
+//Update user
+userRoute.post('/update', verifyToken, (req:any, resp:Response)=>{
+    resp.json({
+        ok:true,
+        user: req.user
+    })
+})
+
 
 export default userRoute;

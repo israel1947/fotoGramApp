@@ -12,7 +12,7 @@ class Token {
         }, this.seed, { expiresIn: this.expiration });
     }
     static checkToken(userToken) {
-        new Promise((resolve, rejects) => {
+        return new Promise((resolve, rejects) => {
             jsonwebtoken_1.default.verify(userToken, this.seed, function (err, decoded) {
                 if (err) {
                     //invalid token
@@ -23,6 +23,8 @@ class Token {
                     resolve(decoded);
                 }
             });
+        }).catch(err => {
+            console.log(err);
         });
     }
 }
