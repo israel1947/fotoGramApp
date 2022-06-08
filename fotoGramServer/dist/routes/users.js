@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const userModel_1 = require("../model/userModel");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const token_1 = __importDefault(require("../class/token"));
 const userRoute = express_1.Router();
 //login
 userRoute.post('/login', (req, resp) => {
@@ -23,10 +24,17 @@ userRoute.post('/login', (req, resp) => {
                 message: 'the credential is not correct'
             });
         }
+        //valid login
         if (userDB.comparePassword(userLogin.password)) {
+            const userToken = token_1.default.getJwtToken({
+                _id: userDB._id,
+                nombre: userDB.nombre,
+                email: userDB.email,
+                avatar: userDB.avatar
+            });
             resp.json({
                 ok: true,
-                token: 'aafaesfaefaefaef52f1asfas5f65'
+                token: userToken
             });
         }
         else {
@@ -47,10 +55,15 @@ userRoute.post('/create', (req, resp) => {
     };
     //save req in the db
     userModel_1.User.create(user).then(userDB => {
+        const userToken = token_1.default.getJwtToken({
+            _id: userDB._id,
+            nombre: userDB.nombre,
+            email: userDB.email,
+            avatar: userDB.avatar
+        });
         resp.json({
             ok: true,
-            user: userDB
-            //message:'the user has been successfully created'
+            token: userToken
         });
     }).catch(err => {
         resp.json({

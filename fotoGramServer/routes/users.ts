@@ -1,6 +1,7 @@
 import { Router,Request,Response } from "express";
 import { User } from "../model/userModel";
 import bcrypt from 'bcrypt';
+import Token from "../class/token";
 
 const userRoute = Router();
 
@@ -23,11 +24,17 @@ userRoute.post('/login',(req:Request, resp:Response)=>{
                 message:'the credential is not correct'
           });
         }
-
+        //valid login
        if( userDB.comparePassword(userLogin.password)){
+           const userToken = Token.getJwtToken({
+               _id:userDB._id,
+               nombre:userDB.nombre,
+               email:userDB.email,
+               avatar:userDB.avatar
+           })
            resp.json({
                ok:true,
-               token:'aafaesfaefaefaef52f1asfas5f65'
+               token:userToken
            })
            
        }else{
@@ -52,11 +59,18 @@ userRoute.post('/create',(req:Request, resp:Response)=>{
 
     //save req in the db
     User.create(user).then(userDB=>{  
+
+        const userToken = Token.getJwtToken({
+            _id:userDB._id,
+            nombre:userDB.nombre,
+            email:userDB.email,
+            avatar:userDB.avatar
+        })
         resp.json({
-         ok:true,
-         user:userDB
-        //message:'the user has been successfully created'
+            ok:true,
+            token:userToken
         });
+        
     }).catch(err=>{
         resp.json({
             ok:false,
