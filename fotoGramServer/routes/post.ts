@@ -5,6 +5,29 @@ import { Post } from '../model/post.model';
 
 const postRouter = Router();
 
+//get post per page
+postRouter.get('/',async (req:any, resp:Response)=>{
+
+    let page = Number(req.query.page) || 1; //page 1 for default
+    let skip = page - 1; // 1 - 1 = 0
+    skip = skip * 10; //0 * 10 = 0
+
+    const posts = await Post
+    .find()
+    .sort({_id:-1})//show post in dec order
+    .skip(skip) //skip page of 10 in 10
+    .limit(10)//return last 10 registers
+    .populate('user','-password')
+    .exec();
+
+    resp.json({
+        ok:true,
+        page,
+        posts,
+    });
+});
+
+//create post
 postRouter.post('/',[verifyToken],(req:any, resp:Response)=>{
     const post={
         created:req.body.created,

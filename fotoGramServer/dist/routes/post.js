@@ -13,6 +13,25 @@ const express_1 = require("express");
 const auth_1 = require("../middlewares/auth");
 const post_model_1 = require("../model/post.model");
 const postRouter = express_1.Router();
+//get post per page
+postRouter.get('/', (req, resp) => __awaiter(void 0, void 0, void 0, function* () {
+    let page = Number(req.query.page) || 1; //page 1 for default
+    let skip = page - 1; // 1 - 1 = 0
+    skip = skip * 10; //0 * 10 = 0
+    const posts = yield post_model_1.Post
+        .find()
+        .sort({ _id: -1 }) //show post in dec order
+        .skip(skip) //skip page of 10 in 10
+        .limit(10) //return last 10 registers
+        .populate('user', '-password')
+        .exec();
+    resp.json({
+        ok: true,
+        page,
+        posts,
+    });
+}));
+//create post
 postRouter.post('/', [auth_1.verifyToken], (req, resp) => {
     const post = {
         created: req.body.created,
