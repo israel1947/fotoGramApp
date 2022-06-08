@@ -2,6 +2,7 @@ import { Router,Response } from "express";
 import { FileUpload } from "../interface/file-upload";
 import { verifyToken } from '../middlewares/auth';
 import { Post } from '../model/post.model';
+import FileSystem from '../class/fileSystem';
 
 
 const postRouter = Router();
@@ -79,6 +80,11 @@ postRouter.post('/upload',[verifyToken],(req:any, resp:Response)=>{
             message:'the file select is not a image',
         });
     }
+
+    //call that method to save images in the folder upload
+    const fileSystem = new FileSystem();
+    fileSystem.saveTempImage(file, req.user._id);
+    
 
     resp.json({
         ok:true,

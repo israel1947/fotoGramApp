@@ -8,10 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const auth_1 = require("../middlewares/auth");
 const post_model_1 = require("../model/post.model");
+const fileSystem_1 = __importDefault(require("../class/fileSystem"));
 const postRouter = express_1.Router();
 //get post per page
 postRouter.get('/', (req, resp) => __awaiter(void 0, void 0, void 0, function* () {
@@ -75,6 +79,9 @@ postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => {
             message: 'the file select is not a image',
         });
     }
+    //call that method to save images in the folder upload
+    const fileSystem = new fileSystem_1.default();
+    fileSystem.saveTempImage(file, req.user._id);
     resp.json({
         ok: true,
         file: file.mimetype
