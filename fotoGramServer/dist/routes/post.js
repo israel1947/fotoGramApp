@@ -57,7 +57,7 @@ postRouter.post('/', [auth_1.verifyToken], (req, resp) => {
     });
 });
 //Upload files
-postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => {
+postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req.files) {
         return resp.status(400).json({
             ok: false,
@@ -81,10 +81,10 @@ postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => {
     }
     //call that method to save images in the folder upload
     const fileSystem = new fileSystem_1.default();
-    fileSystem.saveTempImage(file, req.user._id);
+    yield fileSystem.saveTempImage(file, req.user._id);
     resp.json({
         ok: true,
         file: file.mimetype
     });
-});
+}));
 exports.default = postRouter;

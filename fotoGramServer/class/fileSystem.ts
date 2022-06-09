@@ -7,14 +7,26 @@ export default class FileSystem{
     constructor(){};
 
     saveTempImage(file:FileUpload, userId:string){
-        //image storage location
-        const path = this.createFolderUser(userId);
 
-        //name of file
-        const nameFile = this.generateUniqueName(file.name);
-        console.log(file.name);
-        console.log(nameFile);
-        
+        return new Promise<void>((resolve,reject)=>{
+
+          //image storage location
+          const path = this.createFolderUser(userId);
+            
+          //name of file
+          const nameFile = this.generateUniqueName(file.name);
+            
+          //move file from temp  to folder  to folder permanent
+          file.mv(`${path}/${nameFile}`,(err:any)=>{
+              if(err){
+                //could not move the file
+                reject(err);
+              }else{
+               //everything worked out well
+               resolve();
+           }
+        });
+      });  
     }
 
     private generateUniqueName(originalName:string){//origiunal name of image when is upload Ex:name.png

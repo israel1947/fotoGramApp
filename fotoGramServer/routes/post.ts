@@ -56,7 +56,7 @@ postRouter.post('/',[verifyToken],(req:any, resp:Response)=>{
 })
 
 //Upload files
-postRouter.post('/upload',[verifyToken],(req:any, resp:Response)=>{
+postRouter.post('/upload',[verifyToken],async (req:any, resp:Response)=>{
     if(!req.files){
         return resp.status(400).json({
             ok:false,
@@ -83,7 +83,7 @@ postRouter.post('/upload',[verifyToken],(req:any, resp:Response)=>{
 
     //call that method to save images in the folder upload
     const fileSystem = new FileSystem();
-    fileSystem.saveTempImage(file, req.user._id);
+    await fileSystem.saveTempImage(file, req.user._id);
     
 
     resp.json({

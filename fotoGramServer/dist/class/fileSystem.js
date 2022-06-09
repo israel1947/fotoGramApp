@@ -10,12 +10,23 @@ class FileSystem {
     constructor() { }
     ;
     saveTempImage(file, userId) {
-        //image storage location
-        const path = this.createFolderUser(userId);
-        //name of file
-        const nameFile = this.generateUniqueName(file.name);
-        console.log(file.name);
-        console.log(nameFile);
+        return new Promise((resolve, reject) => {
+            //image storage location
+            const path = this.createFolderUser(userId);
+            //name of file
+            const nameFile = this.generateUniqueName(file.name);
+            //move file from temp  to folder  to folder permanent
+            file.mv(`${path}/${nameFile}`, (err) => {
+                if (err) {
+                    //could not move the file
+                    reject(err);
+                }
+                else {
+                    //everything worked out well
+                    resolve();
+                }
+            });
+        });
     }
     generateUniqueName(originalName) {
         //extract extention of file
