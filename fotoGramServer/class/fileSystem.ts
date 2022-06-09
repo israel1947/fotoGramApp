@@ -86,4 +86,18 @@ export default class FileSystem{
       const pathTemp = path.resolve(__dirname,'../upload', userId,'temp');
       return fs.readdirSync(pathTemp) || [];
     }
+
+    // Get img by url and user id saved in the db
+    getImgUrl(userId:string, img:string){
+      //path posts
+      const pathImage = path.resolve(__dirname,'../upload', userId,'posts', img);
+
+      //in case that img not exist
+      const exist = fs.existsSync(pathImage);
+      if(!exist){
+        return path.resolve(__dirname,'../assets/400x250.jpg');
+      }
+
+      return pathImage;
+    }
 } 

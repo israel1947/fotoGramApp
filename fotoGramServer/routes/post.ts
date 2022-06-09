@@ -96,5 +96,14 @@ postRouter.post('/upload',[verifyToken],async (req:any, resp:Response)=>{
     });
 });
 
+//show img by URL
+postRouter.get('/imagen/:userid/:img',(req:any, resp:Response)=>{
+    const userId = req.params.userid;
+    const img = req.params.img;
+
+    const pathImage= fileSystem.getImgUrl(userId,img);
+
+    resp.sendFile(pathImage);
+});
 
 export default postRouter;

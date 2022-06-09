@@ -90,4 +90,11 @@ postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => __awaiter(void 0
         file: file.mimetype
     });
 }));
+//show img by URL
+postRouter.get('/imagen/:userid/:img', (req, resp) => {
+    const userId = req.params.userid;
+    const img = req.params.img;
+    const pathImage = fileSystem.getImgUrl(userId, img);
+    resp.sendFile(pathImage);
+});
 exports.default = postRouter;
