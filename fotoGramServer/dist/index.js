@@ -15,6 +15,12 @@ serve.app.use(body_parser_1.default.urlencoded({ extended: true }));
 serve.app.use(body_parser_1.default.json());
 //File Upload
 serve.app.use(express_fileupload_1.default());
+serve.app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 //routes of the aplication
 serve.app.use('/user', users_1.default);
 serve.app.use('/post', post_1.default);
