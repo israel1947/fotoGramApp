@@ -51,5 +51,27 @@ class FileSystem {
         }
         return pathUserTemp;
     }
+    imagensFromTempAPost(userId) {
+        const pathTempUser = path_1.default.resolve(__dirname, '../upload', userId, 'temp');
+        const pathPostUser = path_1.default.resolve(__dirname, '../upload', userId, 'posts');
+        if (!fs_1.default.existsSync(pathTempUser)) {
+            return [];
+        }
+        if (!fs_1.default.existsSync(pathPostUser)) {
+            //create pathPostUser in case dont exist
+            fs_1.default.mkdirSync(pathPostUser);
+        }
+        const imagensTemp = this.getImagensInTemp(userId);
+        //move from temp folder to post folder
+        imagensTemp.forEach(image => {
+            fs_1.default.renameSync(`${pathTempUser}/${image}`, `${pathPostUser}/${image}`);
+        });
+        //return the imagen name to save in the mongo document
+        return imagensTemp;
+    }
+    getImagensInTemp(userId) {
+        const pathTemp = path_1.default.resolve(__dirname, '../upload', userId, 'temp');
+        return fs_1.default.readdirSync(pathTemp) || [];
+    }
 }
 exports.default = FileSystem;

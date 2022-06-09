@@ -17,6 +17,7 @@ const auth_1 = require("../middlewares/auth");
 const post_model_1 = require("../model/post.model");
 const fileSystem_1 = __importDefault(require("../class/fileSystem"));
 const postRouter = express_1.Router();
+const fileSystem = new fileSystem_1.default();
 //get post per page
 postRouter.get('/', (req, resp) => __awaiter(void 0, void 0, void 0, function* () {
     let page = Number(req.query.page) || 1; //page 1 for default
@@ -45,6 +46,9 @@ postRouter.post('/', [auth_1.verifyToken], (req, resp) => {
         user: req.body.user,
     };
     post.user = req.user._id;
+    //array to save imagens in the db mongo
+    const imagens = fileSystem.imagensFromTempAPost(req.user._id);
+    post.img = imagens;
     post_model_1.Post.create(post).then((postDB) => __awaiter(void 0, void 0, void 0, function* () {
         //show object of user information and the post created 
         yield postDB.populate('user', '-password');
@@ -80,7 +84,6 @@ postRouter.post('/upload', [auth_1.verifyToken], (req, resp) => __awaiter(void 0
         });
     }
     //call that method to save images in the folder upload
-    const fileSystem = new fileSystem_1.default();
     yield fileSystem.saveTempImage(file, req.user._id);
     resp.json({
         ok: true,

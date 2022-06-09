@@ -6,6 +6,7 @@ import FileSystem from '../class/fileSystem';
 
 
 const postRouter = Router();
+const fileSystem = new FileSystem();
 
 //get post per page
 postRouter.get('/',async (req:any, resp:Response)=>{
@@ -40,8 +41,12 @@ postRouter.post('/',[verifyToken],(req:any, resp:Response)=>{
     }
     post.user = req.user._id
 
-    Post.create(post).then(async postDB=>{
+    //array to save imagens in the db mongo
+    const imagens = fileSystem.imagensFromTempAPost(req.user._id);
+    post.img =  imagens;
 
+
+    Post.create(post).then(async postDB=>{
         //show object of user information and the post created 
         await postDB.populate('user','-password');
 
@@ -82,7 +87,6 @@ postRouter.post('/upload',[verifyToken],async (req:any, resp:Response)=>{
     }
 
     //call that method to save images in the folder upload
-    const fileSystem = new FileSystem();
     await fileSystem.saveTempImage(file, req.user._id);
     
 
