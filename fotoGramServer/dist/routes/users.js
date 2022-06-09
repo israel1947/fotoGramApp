@@ -105,4 +105,12 @@ userRoute.post('/update', auth_1.verifyToken, (req, resp) => {
         });
     });
 });
+//return user information by your token
+userRoute.get('/', [auth_1.verifyToken], (req, resp) => {
+    const user = req.user;
+    resp.json({
+        ok: true,
+        user
+    });
+});
 exports.default = userRoute;
