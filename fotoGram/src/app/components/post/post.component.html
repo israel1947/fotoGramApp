@@ -13,13 +13,13 @@
   <!-- slide post -->
   <ion-slides pager="ios">
     <ion-slide class="image-slide" 
-               style="background-image:url('/assets/perro-1.jpg')" >
+               [style]="img1 | domSanitizer " >
     </ion-slide>
     <ion-slide class="image-slide" 
-               style="background-image:url('/assets/perro-2.jpg')" >
+               [style]="img2 | domSanitizer " >
     </ion-slide>
     <ion-slide class="image-slide" 
-               style="background-image:url('/assets/perro-3.jpg')" >
+               [style]="img3 | domSanitizer " >
     </ion-slide>
   </ion-slides>
 
