@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -49,9 +50,15 @@ slidesOptions = {
   
 };
 
+loginUser={
+  email:'correo@correo.com',
+  password:'123456'
+}
+
 @ViewChild('slidePrincipal') slides:IonSlides;
 
-  constructor() { }
+  constructor( private auth:AuthService,
+  ) { }
 
    ngAfterViewInit() {
     this.slides.lockSwipes(true)
@@ -77,7 +84,11 @@ slidesOptions = {
   }
 
   login(fLogin:NgForm){
+    if(fLogin.invalid){return; }
+    this.auth.login(this.loginUser.email, this.loginUser.password)
     console.log(fLogin.valid);
+    console.log(fLogin.value);
+    
   }
 
   register(fRegister:NgForm){
