@@ -17,9 +17,29 @@ export class AuthService {
 
   login(email:string,password:string){
     const data = {email,password};
-    this.http.post(`${URL}/user/login`,data)
-      .subscribe(resp=>{
-        console.log(resp);
-      });
+    return new Promise((resolve) => {
+      
+      this.http.post(`${URL}/user/login`,data)
+        .subscribe(resp=>{
+          if(resp['ok']){
+            this.saveToken(resp['token']);
+            resolve(true);
+          }else{
+            //delete token in case that user or password is incorrecte
+            this.token=null;
+            this.storage.clear();
+            resolve(false);
+          }
+       });
+    })
   }
+
+  async saveToken(token:string){
+    this.token = token;
+    //save token in the storage
+    const storage = await this.storage.create();
+    await this.storage.set('token',token);
+  }
+
+
 }
