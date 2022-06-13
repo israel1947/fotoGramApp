@@ -10,19 +10,16 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true" color="light">
   <!-- Refresh -->
-  
+  <ion-refresher slot="fixed" (ionRefresh)="RefreshPosts($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!-- posts -->
   <app-posts [posts]="posts"></app-posts>
-  
   <!-- infinite scrool -->
-  <ion-infinite-scroll threshold="150px" 
-                       position="bottom" 
-                       (ionInfinite)="loadMorePosts($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" 
-                                 loadingText="Loading more data...">
+  <ion-infinite-scroll threshold="150px" position="bottom" [disabled]="!infiniteScorllEnabled"(ionInfinite)="loadMorePosts($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

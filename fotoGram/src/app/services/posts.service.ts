@@ -15,7 +15,11 @@ export class PostsService {
 
   constructor(private http:HttpClient) { }
 
-  getPost(){
+  getPost(pull:boolean=false){
+    if(pull){//get page 1 when refresh page and new posts are loaded
+      this.paginaPost = 0;
+    }
+
     this.paginaPost ++;
     return this.http.get<PostResponse>(`${URL}/post/?page=${this.paginaPost}`);
   }
