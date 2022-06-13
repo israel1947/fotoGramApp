@@ -1,4 +1,37 @@
+<div class="post">
+  <ion-item lines="none">
+    <!-- user information -->
+    <ion-label>
+      <h3>{{post.user.nombre}}</h3>
+      <h5>{{post.user.email}}</h5>
+    </ion-label>
+    <!-- perfil image -->
+    <ion-avatar slot="start">
+      <img src="/assets/avatars/{{post.user.avatar}}" />
+    </ion-avatar>
+  </ion-item>
+  <!-- slide post -->
+  <ion-slides pager="ios">
+    <ion-slide class="image-slide" 
+               style="background-image:url('/assets/perro-1.jpg')" >
+    </ion-slide>
+    <ion-slide class="image-slide" 
+               style="background-image:url('/assets/perro-2.jpg')" >
+    </ion-slide>
+    <ion-slide class="image-slide" 
+               style="background-image:url('/assets/perro-3.jpg')" >
+    </ion-slide>
+  </ion-slides>
 
-<p>
-  Posts: {{post.menssage}}
-</p>
+  <!-- Map -->
+
+  <!-- icons -->
+  <ion-item lines="none">
+    <ion-icon slot="start" name="heart-outline"></ion-icon>
+    <ion-icon slot="end" name="bookmark"></ion-icon>
+  </ion-item>
+  <!-- message -->
+  <ion-item lines="none">
+    <ion-label text-wrap>{{post.menssage}}</ion-label>
+  </ion-item>
+</div>
