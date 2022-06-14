@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { UiServiceService } from 'src/app/services/ui-service.service';
 
 @Component({
   selector: 'app-login',
@@ -59,6 +60,7 @@ loginUser={
 
   constructor( private auth:AuthService,
                private navCtrl:NavController,
+               private uiService:UiServiceService,
   ) { }
 
    ngAfterViewInit() {
@@ -92,6 +94,7 @@ loginUser={
     this.navCtrl.navigateRoot('/main/tabs/tab1',{animated:true});
     }else{
       //credentials incorrects alert
+      this.uiService.alertInfo("User and password is incorrecte",'Incorrect Credentials');
     }
   }
 

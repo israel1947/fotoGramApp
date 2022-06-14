@@ -20,12 +20,13 @@ export class AuthService {
     return new Promise((resolve) => {
       
       this.http.post(`${URL}/user/login`,data)
-        .subscribe(resp=>{
+        .subscribe(async resp=>{
           if(resp['ok']){
             this.saveToken(resp['token']);
             resolve(true);
           }else{
             //delete token in case that user or password is incorrecte
+            const storage = await this.storage.create();
             this.token=null;
             this.storage.clear();
             resolve(false);
