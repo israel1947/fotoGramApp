@@ -33,7 +33,7 @@ class FileSystem {
         const nameArr = originalName.split('.');
         const extention = nameArr[nameArr.length - 1];
         //create unique name
-        const uniqId = uniqid_1.default();
+        const uniqId = (0, uniqid_1.default)();
         //return new name + unique id Ex:sfs5fs65fsf4.png
         return `${uniqId}.${extention}`;
     }

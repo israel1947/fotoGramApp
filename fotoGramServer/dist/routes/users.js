@@ -8,7 +8,7 @@ const userModel_1 = require("../model/userModel");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const token_1 = __importDefault(require("../class/token"));
 const auth_1 = require("../middlewares/auth");
-const userRoute = express_1.Router();
+const userRoute = (0, express_1.Router)();
 //login
 userRoute.post('/login', (req, resp) => {
     const userLogin = {

@@ -25,4 +25,4 @@ postSchema.pre('save', function (next) {
     this.created = new Date();
     next();
 });
-exports.Post = mongoose_1.model('Post', postSchema);
+exports.Post = (0, mongoose_1.model)('Post', postSchema);

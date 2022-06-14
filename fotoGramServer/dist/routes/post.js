@@ -16,7 +16,7 @@ const express_1 = require("express");
 const auth_1 = require("../middlewares/auth");
 const post_model_1 = require("../model/post.model");
 const fileSystem_1 = __importDefault(require("../class/fileSystem"));
-const postRouter = express_1.Router();
+const postRouter = (0, express_1.Router)();
 const fileSystem = new fileSystem_1.default();
 //get post per page
 postRouter.get('/', (req, resp) => __awaiter(void 0, void 0, void 0, function* () {
