@@ -99,4 +99,6 @@ loginUser={
     console.log(fRegister.valid);
   }
 
+  image="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
+
 }

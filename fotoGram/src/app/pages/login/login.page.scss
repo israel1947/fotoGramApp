@@ -1,6 +1,6 @@
 .mainSlide, .mainSlide ion-slide {
     width: 100%;
-    height: 100%;
+    //height: 100%;
 }
 
 img {
@@ -15,4 +15,36 @@ img {
 .pick-avatar-seleccionado {
     transition: opacity 0.5s linear;
     opacity: 1 !important;
+}
+
+
+    
+    ion-input, ion-item{
+        //background-color: #f3f3f3;
+        //border-radius: 22px;
+        margin-bottom: 20px;
+        text-align: left;
+
+        ion-icon{
+            margin:0px 21px;
+        }
+    }
+
+
+    ion-item{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    ion-button{
+        height: 46px;
+        text-transform: capitalize;
+    }
+    
+
+
+.imageHeader{
+    background-size: cover;
+    background-position: center center;
+    clip-path: polygon(0% 0%, 100% 0, 100% 64%, 50% 75%, 0 64%);
 }
