@@ -6,20 +6,8 @@
 img {
     width: 120px;
 }
-
-.pick-avatar {
-    width: 80px;
-    opacity: 0.3;
-}
-
-.pick-avatar-seleccionado {
-    transition: opacity 0.5s linear;
-    opacity: 1 !important;
-}
-
-
-    
-    ion-input, ion-item{
+  
+ion-input, ion-item{
         //background-color: #f3f3f3;
         //border-radius: 22px;
         margin-bottom: 20px;
