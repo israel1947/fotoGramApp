@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonSlides, NavController } from '@ionic/angular';
+import { User } from 'src/app/interfaces/interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { UiServiceService } from 'src/app/services/ui-service.service';
 
@@ -51,9 +52,16 @@ slidesOptions = {
   
 };
 
+registerUser:User={
+  nombre:'',
+  email:'',
+  password:'',
+  avatar:''
+}
+
 loginUser={
-  email:'correo@correo.com',
-  password:'123456'
+  email:'',
+  password:''
 }
 
 @ViewChild('slidePrincipal') slides:IonSlides;
@@ -98,8 +106,15 @@ loginUser={
     }
   }
 
-  register(fRegister:NgForm){
-    console.log(fRegister.valid);
+  async register(fRegister:NgForm){
+    if(fRegister.invalid){return;}
+    const valid =  await this.auth.register(this.registerUser);
+    if(valid){
+      this.navCtrl.navigateRoot('/main/tabs/tab1',{animated:true});
+    }else{
+      this.uiService.alertInfo('Please verify that the data entered is correct','Incorects Data');
+    }
+    //console.log(fRegister.valid);
   }
 
   image="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg";

@@ -61,17 +61,17 @@
                     <ion-col class="ion-padding">
                         <ion-list>
                           <ion-item >
-                              <ion-input name="email"  type="email" required placeholder=" Email">
+                              <ion-input name="email" [(ngModel)]="registerUser.email" type="email" required placeholder=" Email">
                                 <ion-icon slot="icon-only"  name="mail"></ion-icon>
                               </ion-input>
                             </ion-item>
                             <ion-item>
-                              <ion-input name="nombre" type="text" required placeholder=" Name">
+                              <ion-input name="nombre" [(ngModel)]="registerUser.nombre" type="text" required placeholder=" Name">
                                 <ion-icon slot="icon-only"  name="person"></ion-icon>
                               </ion-input>
                             </ion-item>
                             <ion-item>
-                              <ion-input name="password" type="password" required placeholder=" Password">
+                              <ion-input name="password" [(ngModel)]="registerUser.password" type="password" required placeholder=" Password">
                                 <ion-icon slot="icon-only"  name="lock-closed"></ion-icon>
                               </ion-input>
                             </ion-item> 
