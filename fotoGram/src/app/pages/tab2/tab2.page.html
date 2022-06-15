@@ -5,9 +5,10 @@
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="crearPost()"
+      <ion-button (click)="createPost()"
                   color="primary"
-                  class="ion-text-capitalize">
+                  class="ion-text-capitalize"
+                  [disabled]="post.message < 1">
         Share
       </ion-button>
     </ion-buttons>
@@ -21,7 +22,7 @@
     
     <ion-item>
       <ion-label position="floating">Message</ion-label>
-      <ion-textarea></ion-textarea>
+      <ion-textarea [(ngModel)]="post.message"></ion-textarea>
     </ion-item>
 
     <ion-list>
