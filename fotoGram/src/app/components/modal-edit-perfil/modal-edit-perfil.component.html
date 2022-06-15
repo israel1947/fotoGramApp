@@ -1,15 +1,15 @@
 
+  <ion-content>
+    <form (ngSubmit)="updateUserInformation(fUpdate)" #fUpdate>
 <ion-toolbar>
   <ion-button (click)="closeModal()" slot="start" fill="clear" color="medium">
     <ion-icon slot="icon-only" name="close-outline"  ></ion-icon>
   </ion-button>
   <ion-title>Edit Perfil</ion-title>
-  <ion-button (click)="updateUserInformation()" slot="end" fill="clear" type="submit" >
+  <ion-button  slot="end" fill="clear" type="submit" >
     <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
   </ion-button>
 </ion-toolbar>
-<ion-content>
-  <form>
     <ion-grid fixed>
       <ion-row>
         <ion-col class="ion-text-center">

@@ -109,5 +109,26 @@ export class AuthService {
     });
   }
 
+  //update user information
+  updateUser(user:User){
+    const headers = new HttpHeaders({
+      'x-token':this.token
+    });
+
+    return new Promise((resolve) => {
+      
+      this.http.post(`${URL}/user/update`,user,{headers} )
+        .subscribe(resp=>{
+          if(resp['ok']){
+            //update token
+            this.saveToken(resp['token']);
+            resolve(true);
+          }else{
+            resolve(false);
+          }
+       });
+    });
+  }
+
 
 }
