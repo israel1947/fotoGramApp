@@ -14,7 +14,7 @@ const URL = environment.url
 export class AuthService {
 
   token:string=null;
-  user:User={}
+  private user:User={}
 
   constructor( private http:HttpClient,
                private storage: Storage,
@@ -58,6 +58,14 @@ export class AuthService {
           
         });
     });
+  }
+
+  //get user information
+  getUser(){
+    if(!this.user._id){
+      this.validateToken();
+    }
+    return {...this.user};
   }
 
   async saveToken(token:string){
