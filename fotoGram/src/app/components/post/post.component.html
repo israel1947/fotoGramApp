@@ -11,7 +11,7 @@
     </ion-avatar>
   </ion-item>
   <!-- slide post -->
-  <ion-slides pager="ios">
+ <!--  <ion-slides pager="ios">
     <ion-slide class="image-slide" 
                [style]="img1 | domSanitizer " >
     </ion-slide>
@@ -21,10 +21,10 @@
     <ion-slide class="image-slide" 
                [style]="img3 | domSanitizer " >
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
 
   <!-- Map -->
-
+  <app-maps [coords]="post.coords"></app-maps>
   <!-- icons -->
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline"></ion-icon>

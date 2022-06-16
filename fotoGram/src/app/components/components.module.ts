@@ -7,6 +7,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { AvatarSelectComponent } from './avatar-select/avatar-select.component';
 import { ModalEditPerfilComponent } from './modal-edit-perfil/modal-edit-perfil.component';
 import { FormsModule } from '@angular/forms';
+import { MapsComponent } from './maps/maps.component';
 
 
 
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     PostComponent,
     PostsComponent,
     AvatarSelectComponent,
-    ModalEditPerfilComponent
+    ModalEditPerfilComponent,
+    MapsComponent
   ],
   imports: [
     IonicModule,
