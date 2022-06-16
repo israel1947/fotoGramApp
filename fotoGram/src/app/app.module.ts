@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 
 //plugins
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     IonicStorageModule.forRoot(),
   ],
   providers: [
+    Geolocation,
     {
        provide: RouteReuseStrategy,
        useClass: IonicRouteStrategy
