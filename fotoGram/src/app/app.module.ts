@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 //plugins
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
   ],
   providers: [
     Geolocation,
+    Camera,
     {
        provide: RouteReuseStrategy,
        useClass: IonicRouteStrategy

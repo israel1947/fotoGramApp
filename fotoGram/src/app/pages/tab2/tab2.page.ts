@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostsService } from '../../services/posts.service';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Camera,CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
+declare var window:any;
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -23,6 +25,7 @@ export class Tab2Page {
   constructor( private postService:PostsService,
                private router:Router,
                private geolocation:Geolocation,
+               private camera:Camera,
   ) {}
 
   async createPost(){
@@ -56,6 +59,27 @@ export class Tab2Page {
        console.log('Error getting location', error);
        this.geoLocationSpiner=false;
      });
+  }
+
+  takePicture(){
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation:true,
+      sourceType:this.camera.PictureSourceType.CAMERA
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     const img = window.Ionic.WebView.convertFileSrc(imageData);
+     console.log(img);
+
+     this.tempImages.push(img);
+     
+    }, (err) => {
+     // Handle error
+    });
   }
 }
  

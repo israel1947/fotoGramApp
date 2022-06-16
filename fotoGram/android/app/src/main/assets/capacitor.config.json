@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "fotoGram",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

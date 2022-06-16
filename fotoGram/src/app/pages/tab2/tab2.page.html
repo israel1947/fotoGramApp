@@ -3,7 +3,6 @@
     <ion-title>
       New post
     </ion-title>
-
     <ion-buttons slot="end">
       <ion-button (click)="createPost()"
                   color="primary"
@@ -12,19 +11,15 @@
         Share
       </ion-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
   <ion-list>
-    
     <ion-item>
       <ion-label position="floating">Message</ion-label>
       <ion-textarea [(ngModel)]="post.message"></ion-textarea>
     </ion-item>
-
     <ion-list>
       <ion-item>
         <ion-label>Current location</ion-label>
@@ -32,14 +27,12 @@
         <ion-toggle slot="end" [(ngModel)]="post.potition" (ionChange)="getLocation()"></ion-toggle>
       </ion-item>
     </ion-list>
-
-
   </ion-list>
-
   <ion-row>
     <ion-col size="6">
       <ion-button expand="full"
-                  class="ion-text-capitalize">
+                  class="ion-text-capitalize"
+                  (click)="takePicture()">
         <ion-icon slot="start" name="camera"></ion-icon>
         Camera
       </ion-button>
@@ -52,14 +45,11 @@
       </ion-button>
     </ion-col>
   </ion-row>
-
   <ion-row>
     <ion-col size="3" *ngFor="let image of tempImages">
       <ion-card>
-        <img src="">
+        <img [src]="image | imageSanatizer">
       </ion-card>
     </ion-col>
   </ion-row>
-
-
 </ion-content>
