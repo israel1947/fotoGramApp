@@ -10,21 +10,23 @@
       <img src="/assets/avatars/{{post.user.avatar}}" />
     </ion-avatar>
   </ion-item>
+  
   <!-- slide post -->
- <!--  <ion-slides pager="ios">
+   <ion-slides pager="ios" *ngIf="post.img.length > 1">
     <ion-slide class="image-slide" 
-               [style]="img1 | domSanitizer " >
+               *ngFor="let img of post.img"
+               [style]="(img | imagen:post.user._id) | domSanitizer ">
     </ion-slide>
+  </ion-slides> 
+
+  <ion-slides pager="false" *ngIf="post.img.length === 1" [options]="slideOpts">
     <ion-slide class="image-slide" 
-               [style]="img2 | domSanitizer " >
+              [style]="(post.img[0] | imagen:post.user._id) | domSanitizer ">
     </ion-slide>
-    <ion-slide class="image-slide" 
-               [style]="img3 | domSanitizer " >
-    </ion-slide>
-  </ion-slides> -->
+  </ion-slides> 
 
   <!-- Map -->
-  <app-maps [coords]="post.coords"></app-maps>
+  <app-maps [coords]="post.coords" *ngIf="post.coords"></app-maps>
   <!-- icons -->
   <ion-item lines="none">
     <ion-icon slot="start" name="heart-outline"></ion-icon>

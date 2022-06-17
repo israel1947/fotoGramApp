@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../../interfaces/interface';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -10,6 +9,11 @@ import { AuthService } from '../../services/auth.service';
 export class PostComponent implements OnInit {
 
   @Input() post:Post = {};
+
+   slideOpts ={
+    allowSlideNext:false,
+    allowSlidePrev:false
+  }
   
   constructor() { }
 
