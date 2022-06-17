@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,6 +25,7 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
   providers: [
     Geolocation,
     Camera,
+    FileTransfer,
     {
        provide: RouteReuseStrategy,
        useClass: IonicRouteStrategy

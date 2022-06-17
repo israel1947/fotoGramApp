@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PostResponse, Post } from '../interfaces/interface';
 import { AuthService } from './auth.service';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
 
 
 const URL = environment.url
@@ -16,7 +17,8 @@ export class PostsService {
   newPost = new EventEmitter<Post>();
 
   constructor(private http:HttpClient,
-              private auth:AuthService
+              private auth:AuthService,
+              private transfer:FileTransfer,
   ) { }
 
   //get post from db
@@ -44,6 +46,29 @@ export class PostsService {
         });
     });
   }
+
+  //load img of post /post/upload
+  loadImg(img:string){
+    const options:FileUploadOptions={
+      fileKey:'image',
+      headers:{
+        'x-token':this.auth.token,
+      }
+    };
+
+    const fileTransfer:FileTransferObject = this.transfer.create();
+
+    fileTransfer.upload(img,`${URL}/post/upload`,options)
+      .then(data=>{
+        //load succes
+        console.log(data);
+        
+      }).catch(err=>{
+        //err load
+        console.log('error en carga', err);
+        
+      })
+  };
 
 
 }

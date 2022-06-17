@@ -38,6 +38,7 @@ export class Tab2Page {
       coords:null,
       potition:false
     }
+    this.tempImages=[];
     this.router.navigateByUrl('/main/tabs/tab1');
   }
 
@@ -94,6 +95,9 @@ export class Tab2Page {
       const img = window.Ionic.WebView.convertFileSrc(imageData);
       console.log(img);
  
+      //load img
+      this.postService.loadImg(imageData);
+      //push of img to imgTemp
       this.tempImages.push(img);
       
      }, (err) => {
