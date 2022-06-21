@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { promise } from 'protractor';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/interface';
 
@@ -28,7 +27,7 @@ export class AuthService {
       this.http.post(`${URL}/user/login`,data)
         .subscribe(async resp=>{
           if(resp['ok']){
-            this.saveToken(resp['token']);
+            await this.saveToken(resp['token']);
             resolve(true);
           }else{
             //delete token in case that user or password is incorrecte
@@ -47,7 +46,7 @@ export class AuthService {
         .subscribe(async resp=>{
           console.log(resp);
           if(resp['ok']){
-            this.saveToken(resp['token']);
+            await this.saveToken(resp['token']);
             resolve(true);
           }else{
             const storage = await this.storage.create();
@@ -73,6 +72,7 @@ export class AuthService {
     //save token in the storage
     const storage = await this.storage.create();
     await this.storage.set('token',token);
+    await this.validateToken();
   }
 
   //load token from storage
@@ -82,7 +82,7 @@ export class AuthService {
   }
 
   //validate token is correct
-  async validateToken(){
+  async validateToken():Promise<boolean>{
     await this.loadToken();
     //if token not exist
     if(!this.token){
@@ -128,6 +128,14 @@ export class AuthService {
           }
        });
     });
+  }
+
+  //btn logout
+  logout(){
+    this.token = null;
+    this.user = null;
+    this.storage.clear();
+    this.navCtrl.navigateRoot('/login',{animated:true});
   }
 
 

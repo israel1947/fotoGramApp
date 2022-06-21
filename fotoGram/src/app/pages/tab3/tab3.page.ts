@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ModalEditPerfilComponent } from '../../components/modal-edit-perfil/modal-edit-perfil.component';
 import {  User } from '../../interfaces/interface';
 import { AuthService } from '../../services/auth.service';
+import { PostsService } from '../../services/posts.service';
 
 @Component({
   selector: 'app-tab3',
@@ -16,10 +17,12 @@ export class Tab3Page {
 
   constructor( private modalCtrl: ModalController, 
                private auth:AuthService,
+               private postService:PostsService,
   ) {}
 
   logout(){
-
+    this.postService.paginaPost=0;
+    this.auth.logout();
   }
 
   async editPerfil(id){
