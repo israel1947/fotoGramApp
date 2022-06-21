@@ -12,8 +12,7 @@ import { PostsService } from '../../services/posts.service';
 })
 export class Tab3Page {
 
-  img1="/assets/perro-1.jpg"
-  postImg:Post[]
+  postImg:Post[];
 
 
   constructor( private modalCtrl: ModalController, 
@@ -24,8 +23,7 @@ export class Tab3Page {
   ngOnInit(): void {
     this.postService.getPost()
       .subscribe(resp=>{
-        this.postImg = resp.posts
-        console.log(resp);
+        this.postImg = resp.posts;
       });
       
   }

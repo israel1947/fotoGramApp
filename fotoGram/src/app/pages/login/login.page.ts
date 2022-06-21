@@ -52,10 +52,11 @@ loginUser={
 
   async login(fLogin:NgForm){
     if(fLogin.invalid){return; }
-   const valid = await  this.auth.login(this.loginUser.email, this.loginUser.password);
+      const valid = await  this.auth.login(this.loginUser.email, this.loginUser.password);
+      this.uiService.presentLoading('Logging in...');
    if(valid){
     //redirec to home page
-    this.navCtrl.navigateRoot('/main/tabs/tab1',{animated:true});
+      this.navCtrl.navigateRoot('/main/tabs/tab1',{animated:true});
     }else{
       //credentials incorrects alert
       this.uiService.alertInfo("User and password is incorrecte",'Incorrect Credentials');
@@ -65,6 +66,7 @@ loginUser={
   async register(fRegister:NgForm){
     if(fRegister.invalid){return;}
     const valid =  await this.auth.register(this.registerUser);
+    this.uiService.presentLoading('Registering user...');
     if(valid){
       this.navCtrl.navigateRoot('/main/tabs/tab1',{animated:true});
     }else{
