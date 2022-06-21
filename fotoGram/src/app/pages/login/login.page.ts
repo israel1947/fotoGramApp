@@ -12,17 +12,19 @@ import { UiServiceService } from 'src/app/services/ui-service.service';
 })
 export class LoginPage implements OnInit {
 
-registerUser:User={
-  nombre:'',
-  email:'',
-  password:'',
-  avatar:''
-}
+  image="/assets/socialmedia.png";
+  
+  registerUser:User={
+    nombre:'',
+    email:'',
+    password:'',
+    avatar:''
+  }
 
-loginUser={
-  email:'',
-  password:''
-}
+  loginUser={
+    email:'',
+    password:''
+  }
 
 @ViewChild('slidePrincipal') slides:IonSlides;
 
@@ -75,6 +77,6 @@ loginUser={
     //console.log(fRegister.valid);
   }
 
-  image="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg";
+
 
 }
