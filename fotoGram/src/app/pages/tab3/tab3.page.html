@@ -55,4 +55,15 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-item-divider>
+  </ion-item-divider>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="4" *ngFor="let imag of postImg">
+        <div class="prueba-img-perfil" 
+             [style]="(imag.img | imagen:imag.user._id) | domSanitizer">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

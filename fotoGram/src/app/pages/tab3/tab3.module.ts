@@ -17,7 +17,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    PipesModule
   ],
   declarations: [Tab3Page]
 })
